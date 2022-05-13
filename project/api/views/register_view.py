@@ -20,13 +20,13 @@ class RegisterApiView(generics.CreateAPIView):
         # Send OTP to the serializer to save
         serializer.context['otp'] = otp
 
-        email_data = {
-            'subject': 'Registration Complete',
-            'body': f"You have successfully registered on Recycle Pay. Please click {url} to verify your account",
-            'receiver': request.data['email']
-        }
-
         if serializer.is_valid():
+            email_data = {
+                'subject': 'Registration Complete',
+                'body': f"You have successfully registered on Recycle Pay. Please click {url} to verify your account",
+                'receiver': request.data['email']
+            }
+
             try:
                 Utils.send_email(email_data)
                 serializer.save()
