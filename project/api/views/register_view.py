@@ -27,9 +27,12 @@ class RegisterApiView(generics.CreateAPIView):
         }
 
         if serializer.is_valid():
-
-            serializer.save()
-            return response.Response({'message': 'Success',
-                                      'data': serializer.data}, status=status.HTTP_201_CREATED)
+            try:
+                Utils.send_email(email_data)
+                serializer.save()
+                return response.Response({'message': 'Success',
+                                          'data': serializer.data}, status=status.HTTP_201_CREATED)
+            except Exception as err:
+                raise exceptions.ValidationError({'message': err})
         else:
             raise exceptions.ValidationError(serializer.errors)
