@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
 import dj_database_url
 from decouple import config
 from django.core.management.utils import get_random_secret_key
@@ -20,6 +22,8 @@ DEBUG = config("DEBUG", default=True, cast=bool)
 ALLOWED_HOSTS = ["*"]
 
 WHITENOISE_AUTOREFRESH = True
+
+load_dotenv()
 
 # Application definition
 INSTALLED_APPS = [
