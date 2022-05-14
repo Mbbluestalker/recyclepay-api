@@ -23,7 +23,8 @@ class RegisterApiView(generics.CreateAPIView):
         if serializer.is_valid():
             email_data = {
                 'subject': 'Registration Complete',
-                'body': f"You have successfully registered on Recycle Pay. Please click {url} to verify your account",
+                'body': f"You have successfully registered on Recycle Pay."
+                        f" Please click {url} to verify your account",
                 'receiver': request.data['email']
             }
 
