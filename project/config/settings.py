@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # import dj_database_url
 from decouple import config
@@ -23,7 +23,7 @@ ALLOWED_HOSTS = ["*"]
 
 WHITENOISE_AUTOREFRESH = True
 
-load_dotenv()
+# load_dotenv()
 
 # Application definition
 INSTALLED_APPS = [
