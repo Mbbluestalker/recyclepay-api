@@ -4,7 +4,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from rest_framework import generics, response, status, exceptions
 
 from ..serializers import register_serializer
-from ..utils import Utils
+from lib.utils import Util
 
 
 class RegisterApiView(generics.CreateAPIView):
@@ -14,7 +14,7 @@ class RegisterApiView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
-        otp = randint(10000, 99999)
+        otp = Util.generate_otp()
         url = f'{get_current_site(request).domain}/api/v1/users/verify-email?otp={otp}/'
 
         # Send OTP to the serializer to save
@@ -22,18 +22,18 @@ class RegisterApiView(generics.CreateAPIView):
 
         if serializer.is_valid():
             email_data = {
-                'subject': 'Registration Complete',
-                'body': f"You have successfully registered on Recycle Pay."
-                        f" Please click {url} to verify your account",
-                'receiver': request.data['email']
+                'email_subject': 'Recycle-Pay | Registration Complete',
+                'email_body': f"You have successfully registered on the Recycle-Pay Platform."
+                        f" Please click <a href={url}>this</a> {url} to verify your account",
+                'to_email': request.data['email']
             }
 
             try:
-                Utils.send_email(email_data)
+                Util.send_email(email_data)
                 serializer.save()
                 return response.Response({'message': 'Success',
                                           'data': serializer.data}, status=status.HTTP_201_CREATED)
             except Exception as err:
-                raise exceptions.ValidationError({'message': err})
+                raise exceptions.ValidationError({'message!': err})  # Return appropriate response error. Return response *
         else:
-            raise exceptions.ValidationError(serializer.errors)
+            raise exceptions.ValidationError(serializer.errors)  # return appropriate status code

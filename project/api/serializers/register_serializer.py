@@ -6,7 +6,7 @@ from db.models.user_model import User
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['id', 'email', 'first_name', 'last_name', 'password']
 
         # Prevents the password from showing after submission
         extra_kwargs = {
