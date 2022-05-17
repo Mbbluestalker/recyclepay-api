@@ -15,7 +15,10 @@ class RegisterApiView(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         otp = Util.generate_otp()
-        url = f'{get_current_site(request).domain}/api/v1/users/verify-email?otp={otp}/'
+
+        # Code to encode email address
+
+        url = f'{get_current_site(request).domain}/api/v1/users/verify-email?encoded_email={otp}/'
 
         # Send OTP to the serializer to save
         serializer.context['otp'] = otp
@@ -24,8 +27,8 @@ class RegisterApiView(generics.CreateAPIView):
             email_data = {
                 'email_subject': 'Recycle-Pay | Registration Complete',
                 'email_body': f"You have successfully registered on the Recycle-Pay Platform."
-                        f" Please click <a href={url}>this</a> {url} to verify your account",
-                'to_email': request.data['email']
+                              f" Please click <a href={url}><b>this</b></a> {url} to verify your account",
+                'to_email': [request.data['email'], ]
             }
 
             try:
@@ -34,6 +37,6 @@ class RegisterApiView(generics.CreateAPIView):
                 return response.Response({'message': 'Success',
                                           'data': serializer.data}, status=status.HTTP_201_CREATED)
             except Exception as err:
-                raise exceptions.ValidationError({'message!': err})  # Return appropriate response error. Return response *
+                return response.Response({'message!': str(err)}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            raise exceptions.ValidationError(serializer.errors)  # return appropriate status code
+            return response.Response({'message!': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)

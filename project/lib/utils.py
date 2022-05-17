@@ -39,3 +39,13 @@ class Util:
             )
         except Exception as err:
             raise err
+
+    # Encode text
+    @staticmethod
+    def encode_text(text):
+        return text.encode('ibm500')
+
+    # Decode text
+    @staticmethod
+    def decode_text(text):
+        return text.decode('ibm500')
