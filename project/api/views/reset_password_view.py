@@ -1,12 +1,12 @@
 from rest_framework import generics, status
-from .serializers import ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer
+from serializers.reset_password_serializer import ResetPasswordEmailRequestSerializer, SetNewPasswordSerializer
 from rest_framework.response import Response
 from db.models.user_model import User
-from .utils import Util
+from utils import Util
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from django.conf import settings
-from drf_yasg import openapi
+# from drf_yasg import openapi
 from django.utils.encoding import smart_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
