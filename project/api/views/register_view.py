@@ -16,18 +16,16 @@ class RegisterApiView(generics.CreateAPIView):
         serializer = self.serializer_class(data=request.data)
         otp = Util.generate_otp()
 
-        user_email = request.data['email']
-
-        encoded_mail = Util.encode_text(user_email)
-
-        # Code to encode email address
-
-        url = f'{get_current_site(request).domain}/api/v1/auth/verify?encoded_email={encoded_mail}/'
-
         # Send OTP to the serializer to save
         serializer.context['otp'] = otp
 
         if serializer.is_valid():
+            user_email = request.data['email']
+
+            # Code to encode email address
+            encoded_mail = Util.encode_text(user_email)
+
+            url = f'{get_current_site(request).domain}/api/v1/auth/verify?encoded_email={encoded_mail}/'
             email_data = {
                 'email_subject': 'Recycle-Pay | Registration Complete',
                 'email_body': f"You have successfully registered on the Recycle-Pay Platform."

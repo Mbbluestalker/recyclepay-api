@@ -14,18 +14,16 @@ class TestRegisterApi(test.APITestCase):
             'email': 'me@mail.com',
             'password': 'pass',
             'first_name': 'Micah',
-            'last_name': 'Tundra'
         }
         response = self.client.post(reverse('api-register'), sample_data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data,
-                         {'username': [exceptions.ErrorDetail
-                                       (string='This field is required.', code='required')]})
+                         {'message!': {'last_name':
+                                           [exceptions.ErrorDetail(string='This field is required.', code='required')]}})
 
     def test_to_determine_if_user_is_created_after_registration(self):
         sample_data = {
             'email': 'me@mail.com',
-            'username': 'me',
             'password': 'pass',
             'first_name': 'Micah',
             'last_name': 'Tundra'
@@ -34,7 +32,7 @@ class TestRegisterApi(test.APITestCase):
         response = self.client.post(reverse('api-register'), sample_data)
 
         current_user_count = User.objects.all().count()
-        current_user = User.objects.get(username=sample_data['username'])
+        current_user = User.objects.get(email=sample_data['email'])
 
         self.assertEqual(current_user_count, initial_user_count + 1)
         self.assertIsNotNone(current_user)
