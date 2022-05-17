@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # import dj_database_url
 from decouple import config
@@ -23,7 +23,7 @@ ALLOWED_HOSTS = ["*"]
 
 WHITENOISE_AUTOREFRESH = True
 
-load_dotenv()
+# load_dotenv()
 
 # Application definition
 INSTALLED_APPS = [
@@ -171,8 +171,8 @@ REST_FRAMEWORK = {
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = config("EMAIL_HOST_USER", default=os.environ.get('EMAIL_HOST_USER'))
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default=os.environ.get('EMAIL_HOST_PASSWORD'))
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="dummy@email.com")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="dummy123")
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True

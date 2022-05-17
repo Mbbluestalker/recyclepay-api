@@ -19,7 +19,8 @@ class TestRegisterApi(test.APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data,
                          {'message!': {'last_name':
-                                           [exceptions.ErrorDetail(string='This field is required.', code='required')]}})
+                                           [exceptions.ErrorDetail(string='This field is required.',
+                                                                   code='required')]}})
 
     def test_to_determine_if_user_is_created_after_registration(self):
         sample_data = {

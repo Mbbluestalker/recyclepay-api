@@ -21,9 +21,9 @@ class RegisterApiView(generics.CreateAPIView):
             user_email = request.data['email']
 
             # Code to encode email address
-            encoded_mail = Util.encode_text(user_email)
+            encoded = Util.encode_text(user_email)
 
-            url = f'{get_current_site(request).domain}/api/v1/auth/verify?encoded_email={encoded_mail}/'
+            url = f'{get_current_site(request).domain}/api/v1/auth/verify?encoded_email={encoded}/'
             email_data = {
                 'email_subject':
                     'Recycle-Pay | Registration Complete',
@@ -41,4 +41,5 @@ class RegisterApiView(generics.CreateAPIView):
             except Exception as err:
                 return response.Response({'message!': str(err)}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return response.Response({'message!': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return response.Response({'message!': serializer.errors},
+                                     status=status.HTTP_400_BAD_REQUEST)
