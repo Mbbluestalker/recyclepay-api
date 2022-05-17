@@ -22,6 +22,4 @@ urlpatterns = [
     path('api/password_reset_confirm/', include('django_rest_passwordreset.urls', namespace='password_reset_confirm')),
     path('api/password_reset_complete/', include('django_rest_passwordreset.urls', namespace='password_reset_complete')),
     
-    
-    
 ]

@@ -10,8 +10,8 @@ from faker import Faker
 class TestSetUp(APITestCase):
 
     def setUp(self):
-        self.register_url = reverse('register')
-        self.login_url = reverse('login')
+        self.password_reset_url = reverse('password_reset')
+        self.passwrod_reset_confirm_url = reverse('passwrod_reset_confirm')
         self.fake = Faker()
 
         self.user_data = {
