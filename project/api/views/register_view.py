@@ -1,7 +1,5 @@
-from random import randint
-
 from django.contrib.sites.shortcuts import get_current_site
-from rest_framework import generics, response, status, exceptions
+from rest_framework import generics, response, status
 
 from ..serializers import register_serializer
 from lib.utils import Util
@@ -27,9 +25,11 @@ class RegisterApiView(generics.CreateAPIView):
 
             url = f'{get_current_site(request).domain}/api/v1/auth/verify?encoded_email={encoded_mail}/'
             email_data = {
-                'email_subject': 'Recycle-Pay | Registration Complete',
-                'email_body': f"You have successfully registered on the Recycle-Pay Platform."
-                              f" Please click <a href={url}><b>this</b></a> {url} to verify your account",
+                'email_subject':
+                    'Recycle-Pay | Registration Complete',
+                'email_body':
+                    f"You have successfully registered on the Recycle-Pay Platform."
+                    f" Please click <a href={url}><b>this</b></a> {url} to verify your account",
                 'to_email': [user_email, ]
             }
 
