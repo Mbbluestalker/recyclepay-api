@@ -1,3 +1,4 @@
+import base64
 import random
 
 from decouple import config
@@ -39,12 +40,12 @@ class Util:
         except Exception as err:
             raise err
 
-    # Encode text
+    # Encode email
     @staticmethod
-    def encode_text(text):
-        return text.encode('ibm500')
+    def encode_email(email: str or bytes):
+        return base64.b64encode(email.encode()).decode()
 
-    # Decode text
+    # Decode email
     @staticmethod
-    def decode_text(text):
-        return text.decode('ibm500')
+    def decode_email(encoded_email: str or bytes):
+        return base64.b64decode(encoded_email).decode()
