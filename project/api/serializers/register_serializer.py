@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from db.models.user_model import User
+from db.models import User
 
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'last_name', 'password']
+        fields = ['email', 'first_name', 'last_name', 'password']
 
         # Prevents the password from showing after submission
         extra_kwargs = {

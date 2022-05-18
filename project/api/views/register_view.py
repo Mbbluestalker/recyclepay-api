@@ -1,7 +1,7 @@
 from django.contrib.sites.shortcuts import get_current_site
 from rest_framework import generics, response, status
 
-from ..serializers import register_serializer
+from api.serializers import register_serializer
 from lib.utils import Util
 
 
@@ -34,8 +34,8 @@ class RegisterApiView(generics.CreateAPIView):
             }
 
             try:
-                Util.send_email(email_data)
-                serializer.save()
+                # Util.send_email(email_data)
+                # serializer.save()
                 return response.Response({'message': 'Success',
                                           'data': serializer.data}, status=status.HTTP_201_CREATED)
             except Exception as err:

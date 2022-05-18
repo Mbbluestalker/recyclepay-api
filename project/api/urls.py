@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .views.register_view import RegisterApiView
+# from .views.register_view import RegisterApiView
+from api.views import RegisterApiView
 
 
 urlpatterns = [
