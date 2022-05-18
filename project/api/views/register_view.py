@@ -21,7 +21,7 @@ class RegisterApiView(generics.CreateAPIView):
             user_email = request.data['email']
 
             # Code to encode email address
-            encoded = Util.encode_text(user_email)
+            encoded = Util.encode_email(user_email)
 
             url = f'{get_current_site(request).domain}/api/v1/auth/verify?encoded_email={encoded}/'
             email_data = {
@@ -34,8 +34,8 @@ class RegisterApiView(generics.CreateAPIView):
             }
 
             try:
-                # Util.send_email(email_data)
-                # serializer.save()
+                Util.send_email(email_data)
+                serializer.save()
                 return response.Response({'message': 'Success',
                                           'data': serializer.data}, status=status.HTTP_201_CREATED)
             except Exception as err:
