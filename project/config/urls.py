@@ -18,8 +18,4 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
-    path('api/password_reset_confirm/', include('django_rest_passwordreset.urls', namespace='password_reset_confirm')),
-    path('api/password_reset_complete/', include('django_rest_passwordreset.urls', namespace='password_reset_complete')),
-    
 ]

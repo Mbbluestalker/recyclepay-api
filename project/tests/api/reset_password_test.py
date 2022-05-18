@@ -1,17 +1,16 @@
 from django.core import mail
+from db.models.user_model import User
+from django.urls import reverse
+from faker import Faker
 from rest_framework import status
 from rest_framework.test import APITestCase
-from django.urls import reverse
-from db.models.user_model import User
-from faker import Faker
-
 
 
 class TestSetUp(APITestCase):
 
     def setUp(self):
-        self.password_reset_url = reverse('password_reset')
-        self.passwrod_reset_confirm_url = reverse('passwrod_reset_confirm')
+        self.password_reset_url = reverse('reset-password')
+        self.passwrod_reset_confirm_url = reverse('reset-password-confirm')
         self.fake = Faker()
 
         self.user_data = {
@@ -29,9 +28,9 @@ class TestSetUp(APITestCase):
 
 class PasswordResetTest(APITestCase):
 
-    send_reset_password_email_url = "/api/password_reset/"
-    confirm_reset_password_url = "/api/password_reset_confirm/"
-    complete_reset_password_url = "/api/password_reset_complete"
+    send_reset_password_email_url = "/api/reset-password/"
+    confirm_reset_password_url = "/api/reset-password-confirm/"
+    complete_reset_password_url = "/api/reset-password-complete"
     
     user_data = {
         "email": "test@example.com", 

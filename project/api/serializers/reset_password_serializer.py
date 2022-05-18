@@ -5,17 +5,29 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 
-class ResetPasswordEmailRequestSerializer(serializers.Serializer):
-    email = serializers.EmailField(min_length=2)
+class ResetPasswordSerializer(serializers.Serializer):
+    new_password = serializers.CharField(max_length=40)
+    otp = serializers.CharField(max_length=6)
+    confirm_password = serializers.CharField(max_length=40)
     
-    class Meta:
-        fields = ['email']
-        
-        
     def validate(self, attrs):
-            email = attrs['data'].get('email', '')
+    
+        new_password = attrs.get('new_password')
+        confirm_password = attrs.get('confirm_password')
+        
+        if new_password != confirm_password:
+            raise serializers.ValidationError('The new password must match the confirm password')
+        return attrs
+        
+    
+    # class Meta:
+    #     fields = ['email']
+        
+        
+    # def validate(self, attrs):
+    #         email = attrs['data'].get('email', '')
             
-            return super().validate(attrs)
+    #         return super().validate(attrs)
         
 class SetNewPasswordSerializer(serializers.Serializer):
     password = serializers.CharField(
