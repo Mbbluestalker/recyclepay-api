@@ -1,12 +1,13 @@
+from api.serializers.reset_password_serializer import ResetPasswordSerializer
 from db.models.user_model import User
 from lib.utils import Util
 from rest_framework import generics, status
 from rest_framework.response import Response
-from serializers.reset_password_serializer import RequestPasswordResetEmail
+
 
 
 class RequestPasswordResetEmail(generics.GenericAPIView):
-    serializer_class = RequestPasswordResetEmail
+    serializer_class = ResetPasswordSerializer
     
     def post(self, request, encoded_email):
         
