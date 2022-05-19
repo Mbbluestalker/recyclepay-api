@@ -15,31 +15,33 @@ class RegisterApiView(generics.CreateAPIView):
         otp = Util.generate_otp()
 
         # Send OTP to the serializer to save
-        serializer.context['otp'] = otp
+        serializer.context["otp"] = otp
 
         if serializer.is_valid():
-            user_email = request.data['email']
+            user_email = request.data["email"]
 
             # Code to encode email address
             encoded = Util.encode_email(user_email)
 
-            url = f'{get_current_site(request).domain}/api/v1/auth/verify/{encoded}'
+            url = f"{get_current_site(request).domain}/api/v1/auth/verify/{encoded}"
             email_data = {
-                'email_subject':
-                    'Recycle-Pay | Registration Complete',
-                'email_body':
-                    f"You have successfully registered on the Recycle-Pay Platform."
-                    f" Please click <a href={url}><b>this</b></a> {url} to verify your account",
-                'to_email': [user_email, ]
+                "email_subject": "Recycle-Pay | Registration Complete",
+                "email_body": f"You have successfully registered on the Recycle-Pay Platform."
+                f" Please click <a href={url}><b>this</b></a> {url} to verify your account",
+                "to_email": [
+                    user_email,
+                ],
             }
 
             try:
                 Util.send_email(email_data)
                 serializer.save()
-                return response.Response({'message': 'Success',
-                                          'data': serializer.data}, status=status.HTTP_201_CREATED)
+                return response.Response(
+                    {"message": "Success", "data": serializer.data}, status=status.HTTP_201_CREATED
+                )
             except Exception as err:
-                return response.Response({'message!': str(err)}, status=status.HTTP_400_BAD_REQUEST)
+                return response.Response({"message!": str(err)}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return response.Response({'message!': serializer.errors},
-                                     status=status.HTTP_400_BAD_REQUEST)
+            return response.Response(
+                {"message!": serializer.errors}, status=status.HTTP_400_BAD_REQUEST
+            )
