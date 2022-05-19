@@ -1,5 +1,5 @@
 from django.contrib.sites.shortcuts import get_current_site
-from rest_framework import generics, response, status
+from rest_framework import generics, response, status, permissions
 
 from api.serializers import register_serializer
 from lib.utils import Util
@@ -8,7 +8,7 @@ from lib.utils import Util
 class RegisterApiView(generics.CreateAPIView):
     serializer_class = register_serializer.RegisterSerializer
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -23,7 +23,7 @@ class RegisterApiView(generics.CreateAPIView):
             # Code to encode email address
             encoded = Util.encode_email(user_email)
 
-            url = f'{get_current_site(request).domain}/api/v1/auth/verify?encoded_email={encoded}/'
+            url = f'{get_current_site(request).domain}/api/v1/auth/verify/{encoded}'
             email_data = {
                 'email_subject':
                     'Recycle-Pay | Registration Complete',
