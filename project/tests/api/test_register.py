@@ -1,7 +1,6 @@
+from db.models import User
 from django.shortcuts import reverse
-from rest_framework import test, status, exceptions
-
-from db.models.user_model import User
+from rest_framework import exceptions, status, test
 
 
 class TestRegisterApi(test.APITestCase):
