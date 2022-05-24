@@ -1,0 +1,1 @@
+from views.reset_password_view import RequestPasswordResetEmail
