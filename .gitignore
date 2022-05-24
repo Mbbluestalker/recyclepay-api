@@ -9,7 +9,8 @@ db.sqlite3
 *.pyc
 venv/
 __pycache__/
-.env
+.env 
+Pipfile
 # [Project]
 project/staticfiles
 project/db/migrations/
