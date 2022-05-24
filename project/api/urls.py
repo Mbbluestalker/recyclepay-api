@@ -1,5 +1,4 @@
-""" URL Configuration for core auth """
-from api.views.reset_password_view import RequestPasswordResetEmail
+from api.views import RequestPasswordResetEmail
 from django.urls import path
 
 
