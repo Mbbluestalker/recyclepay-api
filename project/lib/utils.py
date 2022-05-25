@@ -44,7 +44,7 @@ class Util:
     @staticmethod
     def encode_email(email: str or bytes):
         return base64.b64encode(email.encode()).decode()
-    
+
     # Decode email
     @staticmethod
     def decode_email(encoded_email: str or bytes):
