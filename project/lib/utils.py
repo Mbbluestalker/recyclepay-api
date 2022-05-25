@@ -39,7 +39,7 @@ class Util:
             )
         except Exception as err:
             raise err
-    
+
     # Encode email
     @staticmethod
     def encode_email(email: str or bytes):

@@ -1,3 +1,4 @@
+from db.models import User
 from django.contrib import admin
 from db.models import User
 
