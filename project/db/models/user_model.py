@@ -45,3 +45,5 @@ class User(AbstractUser):
 
     class Meta:
         ordering = ["-created_at"]
+
+        
