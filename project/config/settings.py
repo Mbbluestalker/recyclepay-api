@@ -98,15 +98,15 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-default = {
-    "ENGINE": "django.db.backends.sqlite3",
-    "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
 }
 
 heroku_db = dj_database_url.config(conn_max_age=500)
-DATABASES = {
-    "default": heroku_db or default
-}
+DATABASES['default'].update(heroku_db)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
