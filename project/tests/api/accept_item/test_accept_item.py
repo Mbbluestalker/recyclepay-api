@@ -48,10 +48,9 @@ class AcceptItemViewAPITestCase(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
         '''Create Record with pk=1 in Category'''
-        Category.objects.create(name="PLASTIC")
+        category = Category.objects.create(name="PLASTIC")
 
         '''Create Order by Individual'''
-        category = Category.objects.get(pk=1)
         Order.objects.create(
             title = "request for pickup of plastics",
             location = "Ajah",
