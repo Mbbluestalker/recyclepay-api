@@ -38,11 +38,6 @@ class AcceptItemViewAPITestCase(APITestCase):
             is_individual = True
         )
 
-        '''Data to be used to update order record'''
-        self.data = {
-            "status": "accepted",
-        }
-
         '''Set Collector Credentials'''
         self.token = Token.objects.create(user=self.user)
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
@@ -68,11 +63,6 @@ class AcceptItemViewAPITestCase(APITestCase):
         self.assertEqual(resolve(url).func.view_class, AcceptItemView)
         self.assertNotEqual(resolve(url).func.view_class, ConfirmItem)
 
-    def test_get_accept_item_authenticated_with_credentials(self):
-        response = self.client.get(self.accept_item_url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertNotEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
     def test_get_accept_item_not_authenticated_without_credentials(self):
         self.client.force_authenticate(user=None, token=None)
         response = self.client.get(self.accept_item_url)
@@ -86,19 +76,3 @@ class AcceptItemViewAPITestCase(APITestCase):
         response = self.client.get(self.accept_item_url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertNotEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_put_accept_item_authenticated_with_credentials(self):
-        response = self.client.get(self.accept_item_url, self.data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertNotEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(response.data.get('message'), 'Successfully accepted request!')
-        self.assertNotEqual(response.data.get('message'), 'pending')
-
-    def test_put_accept_item_Customer_authenticated_with_credentials(self):
-        self.client.force_authenticate(user=None, token=None)
-        self.token = Token.objects.create(user=self.user_customer)
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
-        response = self.client.put(self.accept_item_url, self.data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertNotEqual(response.status_code, status.HTTP_200_OK)
-
