@@ -20,6 +20,7 @@ class User(AbstractUser):
     is_superuser = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    points_earned = models.FloatField(default=0.0)
 
     def user_type(self):
         group = (

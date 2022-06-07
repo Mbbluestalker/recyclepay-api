@@ -1,2 +1,3 @@
 from .accept_item_serializer import AcceptItemOrderSerializer
+from .pickups_update_serializer import PickupsUpdateSerializer
 from .register_serializer import RegisterSerializer

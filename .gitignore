@@ -9,12 +9,12 @@ db.sqlite3
 *.pyc
 venv/
 __pycache__/
-.env 
+.env
 Pipfile
 env/
 # [Project]
 project/staticfiles
-project/db/migrations/
+#project/db/migrations/
 project/api/migrations/
 api/migrations/
 
@@ -195,4 +195,3 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
-
