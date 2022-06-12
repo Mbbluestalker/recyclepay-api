@@ -175,8 +175,8 @@ REST_FRAMEWORK = {
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="dummy@email.com")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="dummy123")
-EMAIL_PORT = 465
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="afosolex03@gmail.com")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="holiness12")
+EMAIL_PORT = 587 # 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True

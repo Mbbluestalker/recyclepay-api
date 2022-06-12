@@ -19,7 +19,8 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
                 return Response({'message': 'Error', 'data': 'The otp provided is not correct' }, status=status.HTTP_400_BAD_REQUEST)
             user.set_password(new_password)
             user.save()
-            return Response({'messsage': 'success', 'data': 'The new password set was successful'}, status=status.HTTP_200_OK)
+
+            return Response(data={'otp':otp ,'messsage': 'success', 'data': 'The new password set was successful'}, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
