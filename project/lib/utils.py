@@ -49,3 +49,13 @@ class Util:
     @staticmethod
     def decode_email(encoded_email: str or bytes):
         return base64.b64decode(encoded_email).decode()
+
+    # Calculate Points Earned
+    @staticmethod
+    def points_earned(weight_in_kg):
+        return weight_in_kg * 10
+
+    # Amount Earned
+    @staticmethod
+    def amount_earned(points):
+        return points * 5
