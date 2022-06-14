@@ -42,7 +42,9 @@ class LoginView(generics.GenericAPIView):
                 if user.is_verified and user.check_password(password):
                         token, _ = Token.objects.get_or_create(user=user)
                         return Response(
-                            data={"token": token.key, "success": "You've successfully Logged in"},
+                            data={"token": token.key,
+                                  "success": "You've successfully Logged in",
+                                  "user_type": user.user_type()},
                             status=status.HTTP_200_OK,
                         )
 
