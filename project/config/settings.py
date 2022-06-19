@@ -162,3 +162,5 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="holiness12")
 EMAIL_PORT = 587 # 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+

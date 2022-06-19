@@ -17,7 +17,9 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         # Retrieve OTP from view
         otp = self.context["otp"]
+        group = self.context["otp"]
         new_user.otp = otp
+        new_user.is_individual = True
 
         new_user.save()
         return new_user
