@@ -75,7 +75,7 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ["https://*"]
+CSRF_TRUSTED_ORIGINS = ["https://recycle-pay.herokuapp.com"]
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
