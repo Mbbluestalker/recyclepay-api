@@ -1,6 +1,5 @@
 from api.serializers.login_logout_serializer import UserLoginSerializer
 from db.models.user_model import User
-from django.contrib.auth import logout
 from rest_framework import generics, status
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny, IsAuthenticated

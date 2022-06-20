@@ -1,9 +1,6 @@
 from api.serializers.forgotPasswordSerializer import ForgotPasswordSerializer
 from db.models.user_model import User
-from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import BadHeaderError, send_mail
-from django.urls import reverse
 from lib.utils import Util
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
@@ -19,7 +16,6 @@ class ForgotpasswordAPIViews(generics.GenericAPIView):
             email = serializer.validated_data["email"]
             try:
                 user = User.objects.get(email=email)
-
                 encoded_email = Util.encode_email(email)
                 link = f"{get_current_site(request).domain}/api/v1/auth/reset-password/{encoded_email}"
                 user.otp = Util.generate_otp()
