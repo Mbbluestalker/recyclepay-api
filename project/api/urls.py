@@ -1,8 +1,6 @@
 from django.urls import path
 from api.views import RegisterApiView, LoginView, LogoutView, VerifyEmail, ForgotpasswordAPIViews,  RequestPasswordResetEmail
 from api.views.pickup_request_view import PickUpRequestAPI
-
-
 from api.views import (
     AcceptItemView,
     RegisterApiView, 

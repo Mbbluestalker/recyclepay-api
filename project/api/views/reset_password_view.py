@@ -22,6 +22,5 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
 
             return Response(data={'otp':otp ,'messsage': 'success', 'data': 'The new password set was successful'}, status=status.HTTP_200_OK)
 
-
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
