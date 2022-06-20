@@ -18,7 +18,6 @@ SECRET_KEY = config("SECRET_KEY", default=get_random_secret_key(), cast=str)
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["*"]
 WHITENOISE_AUTOREFRESH = True
 
 # Application definition
@@ -76,7 +75,7 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 CORS_ALLOW_CREDENTIALS = True
-
+CSRF_TRUSTED_ORIGINS = ["*"]
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
