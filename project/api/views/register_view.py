@@ -27,7 +27,7 @@ class RegisterApiView(generics.CreateAPIView):
             email_data = {
                 "email_subject": "Recycle-Pay | Registration Complete",
                 "email_body": f"You have successfully registered on the Recycle-Pay Platform."
-                f" Please click <a href={url}><b>this</b></a> {url} to verify your account",
+                f" Please click this <a href={url}><b>link</b></a> to verify your account",
                 "to_email": [
                     user_email,
                 ],
