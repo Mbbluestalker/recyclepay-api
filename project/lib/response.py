@@ -19,7 +19,11 @@ class Response:
         if not data and not errors:
             raise InvalidResponse("Both data and errors cannot be None")
 
-        return dict(message=message, data=data, errors=errors,)
+        return dict(
+            message=message,
+            data=data,
+            errors=errors,
+        )
 
     @classmethod
     def validate(cls, data, errors):

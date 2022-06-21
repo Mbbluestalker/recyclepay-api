@@ -1,0 +1,1 @@
+from .accept_item_permissions import IsCollector

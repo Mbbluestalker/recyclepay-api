@@ -1,7 +1,7 @@
-from pathlib import Path
 import os
+from pathlib import Path
 
-# import dj_database_url
+import dj_database_url
 from decouple import config
 from django.core.management.utils import get_random_secret_key
 
@@ -15,10 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY", default=get_random_secret_key(), cast=str)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=True, cast=bool)
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = ["*"]
-
 WHITENOISE_AUTOREFRESH = True
 
 # Application definition
@@ -26,7 +25,6 @@ INSTALLED_APPS = [
     # Custom apps
     "db.apps.DbConfig",
     "api.apps.ApiConfig",
-
     # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -34,9 +32,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # Third Party Libraries
     "rest_framework",
+    "rest_framework.authtoken",
     "corsheaders",
 ]
 
@@ -77,7 +75,7 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
 ]
 CORS_ALLOW_CREDENTIALS = True
-
+CSRF_TRUSTED_ORIGINS = ["https://recycle-pay.herokuapp.com"]
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -99,33 +97,26 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "recyclepaydb",
-#         "USER": "postgres",
-#         "PASSWORD": "password",
-#         "HOST": "localhost",
-#         "PORT": "5432",
-#     }
-# }
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+local_db = os.path.join(BASE_DIR, "db.sqlite3")
+heroku_db = dj_database_url.config(default=f"sqlite:////{local_db}")
+DATABASES = {"default": heroku_db}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 # Internationalization
@@ -159,16 +150,16 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.TokenAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.BasicAuthentication",
     ),
 }
 
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="dummy@email.com")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="dummy123")
-EMAIL_PORT = 465
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="afosolex03@gmail.com")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="holiness12")
+EMAIL_PORT = 587 # 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+

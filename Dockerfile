@@ -28,9 +28,13 @@ COPY ./bin/container ./bin
 
 RUN bin/install
 
+RUN bin/migrate
+
 # Production Like Environment
 
 FROM base as api-prod
 
 # Huge image size alert !!!
 RUN bin/manage collectstatic --clear --noinput
+
+CMD ["bin/start"]

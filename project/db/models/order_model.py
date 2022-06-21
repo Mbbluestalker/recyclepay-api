@@ -1,8 +1,6 @@
-from django.db import models
-
 from db.models.categories_model import Category
 from db.models.user_model import User
-
+from django.db import models
 
 STATUS_CHOICES = [
     ("pending", "Pending"),
@@ -26,8 +24,16 @@ class Order(models.Model):
         related_name="requested_by",
     )
     picked_by = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, null=True, limit_choices_to={"is_collector": True},
+        User,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        limit_choices_to={"is_collector": True},
         related_name="picked_by",
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.title} - id:{self.pk}"
+    
+    
