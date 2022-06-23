@@ -97,9 +97,16 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-local_db = os.path.join(BASE_DIR, "db.sqlite3")
-heroku_db = dj_database_url.config(default=f"sqlite:////{local_db}")
-DATABASES = {"default": heroku_db}
+# local_db = os.path.join(BASE_DIR, "db.sqlite3")
+# heroku_db = dj_database_url.config(default=f"sqlite:////{local_db}")
+# DATABASES = {"default": heroku_db}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -161,5 +168,3 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="dummy123")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-
-
