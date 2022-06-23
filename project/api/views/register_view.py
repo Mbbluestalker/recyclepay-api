@@ -23,7 +23,8 @@ class RegisterApiView(generics.CreateAPIView):
             # Code to encode email address
             encoded = Util.encode_email(user_email)
 
-            url = f"{get_current_site(request).domain}/api/v1/auth/verify/{encoded}"
+            # url = f"{get_current_site(request).domain}/api/v1/auth/verify/{encoded}"
+            url = f"http://localhost:3000/verify/{encoded}"
             email_data = {
                 "email_subject": "Recycle-Pay | Registration Complete",
                 "email_body": f"You have successfully registered on the Recycle-Pay Platform."
