@@ -3,7 +3,6 @@ from django.core import mail
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 from db.models import User
-
 from lib import Util
 
 
@@ -58,5 +57,4 @@ class TestResetPassword(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(len(mail.outbox), 0)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
 

@@ -5,6 +5,10 @@ from db.models import User
 
 class ResetPasswordTokenAdmin(admin.ModelAdmin):
     list_display = ('user', 'key', 'created_at', 'ip_address', 'user_agent')
+
+
+class ResetPasswordTokenAdmin(admin.ModelAdmin):
+    list_display = ('user', 'key', 'created_at', 'ip_address', 'user_agent')
     
 
 class PickupAdmin(admin.ModelAdmin):

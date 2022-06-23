@@ -9,7 +9,6 @@ db.sqlite3
 *.pyc
 venv/
 __pycache__/
-.env 
 Pipfile
 env/
 # [Project]
