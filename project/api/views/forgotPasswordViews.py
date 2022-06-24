@@ -17,7 +17,8 @@ class ForgotpasswordAPIViews(generics.GenericAPIView):
             try:
                 user = User.objects.get(email=email)
                 encoded_email = Util.encode_email(email)
-                link = f"{get_current_site(request).domain}/api/v1/auth/reset-password/{encoded_email}"
+                # link = f"{get_current_site(request).domain}/api/v1/auth/reset-password/{encoded_email}"
+                link = f"http://localhost:3000/reset-password/{encoded_email}"
                 user.otp = Util.generate_otp()
                 user.save()
                 data = {
