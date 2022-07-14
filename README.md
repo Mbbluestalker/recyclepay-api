@@ -45,6 +45,11 @@ Currently, truthy tests has been provided in each of the application defined in 
 docker-compose exec api python project/manage.py test
 ```
 
+## Endpoints
+
+![recyclepay endpoints](https://user-images.githubusercontent.com/22947152/178920967-2729b151-67b7-4e2f-b8f6-d6487d55d765.png)
+
+
 ## License
 
 The MIT License - Copyright (c) 2020 - Present, Decagon Institute. https://decagonhq.com/
